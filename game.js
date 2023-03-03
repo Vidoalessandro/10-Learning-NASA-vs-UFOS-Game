@@ -1,5 +1,10 @@
 const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
+const upButton = document.querySelector('#up');
+const leftButton = document.querySelector('#left');
+const rightButton = document.querySelector('#right');
+const downButton = document.querySelector('#down');
+
 
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
@@ -14,7 +19,7 @@ function startGame(){
     game.font = (elementsSize - 12) + 'px Verdana';
     game.textAlign = 'end';
 
-    const map = maps[2];
+    const map = maps[0];
     const mapRows = map.trim().split('\n');
     const mapRowCols = mapRows.map(row => row.trim().split(''));
     console.log(mapRows);
@@ -51,4 +56,31 @@ function setCanvasSize(){
     elementsSize = (canvasSize / 10) - 1;
 
     startGame();
+}
+
+upButton.addEventListener('click', moveUp);
+leftButton.addEventListener('click', moveLeft);
+rightButton.addEventListener('click', moveRight);
+downButton.addEventListener('click', moveDown);
+
+function moveUp(){
+    console.log('up');
+}
+function moveLeft(){
+    console.log('left');
+}
+function moveRight(){
+    console.log('right');
+}
+function moveDown(){
+    console.log('Down');
+}
+
+window.addEventListener('keydown', moveByKeys);
+
+function moveByKeys(event){
+    if(event.key == 'ArrowUp') moveUp();
+    else if(event.key == 'ArrowLeft') moveLeft();
+    else if(event.key == 'ArrowRight') moveRight();
+    else if(event.key == 'ArrowDown') moveDown();
 }
