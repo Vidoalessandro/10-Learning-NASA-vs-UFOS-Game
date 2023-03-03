@@ -12,6 +12,11 @@ window.addEventListener('resize', setCanvasSize);
 let canvasSize;
 let elementsSize;
 
+const playerPosition = {
+    x: undefined,
+    y: undefined
+};
+
 function startGame(){
 
     console.log({canvasSize, elementsSize});
@@ -26,20 +31,37 @@ function startGame(){
     console.log(mapRowCols)
     console.log(map);
 
+    // Clear map
+
+    game.clearRect(0, 0, canvasSize, canvasSize);
+
+    // Rendering with forEach
+
     mapRowCols.forEach((row, rowI) => {
         row.forEach((col, colI) => {
             const emoji = emojis[[col]];
             const posX = elementsSize * (colI + 1) + 5;
             const posY = elementsSize * (rowI + 1) - 7;
+            if(col == 'O'){
+                if(!playerPosition.x && !playerPosition.y){
+                    playerPosition.x = posX;
+                    playerPosition.y = posY;
+                    console.log(playerPosition);
+                }
+            }
             game.fillText(emoji, posX, posY);
         });
     });
+
+    // Rendering with for
 
     /*for(let row = 1; row <= 10; row++){
         for(let col = 1; col <= 10; col++){
             game.fillText(emojis[mapRowCols[row - 1][col -1]], elementsSize * col + 5, elementsSize * row - 7);
         }
     }*/
+
+    movePlayer();
 }
 
 function setCanvasSize(){
@@ -57,23 +79,38 @@ function setCanvasSize(){
 
     startGame();
 }
-
+  
 upButton.addEventListener('click', moveUp);
 leftButton.addEventListener('click', moveLeft);
 rightButton.addEventListener('click', moveRight);
 downButton.addEventListener('click', moveDown);
 
+function movePlayer(){
+    game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
+}
+
 function moveUp(){
     console.log('up');
+    playerPosition.y -= elementsSize;
+    startGame();
 }
+
 function moveLeft(){
     console.log('left');
+    playerPosition.x -= elementsSize;
+    startGame();
 }
+
 function moveRight(){
     console.log('right');
+    playerPosition.x += elementsSize;
+    startGame();
 }
+
 function moveDown(){
     console.log('Down');
+    playerPosition.y += elementsSize;
+    startGame();
 }
 
 window.addEventListener('keydown', moveByKeys);
