@@ -5,6 +5,7 @@ const leftButton = document.querySelector('#left');
 const rightButton = document.querySelector('#right');
 const downButton = document.querySelector('#down');
 const spanLives = document.querySelector('#lives');
+const spanTime = document.querySelector('#time');
 
 
 window.addEventListener('load', setCanvasSize);
@@ -27,6 +28,10 @@ let enemyPositions = [];
 let level = 0;
 let lives = 3;
 
+let timeStart;
+let timePlayer;
+let TimeInterval;
+
 function startGame(){
 
     console.log({canvasSize, elementsSize});
@@ -39,6 +44,11 @@ function startGame(){
     if(!map){
         gameWin();
         return
+    }
+
+    if(!timeStart){
+        timeStart = Date.now();
+        TimeInterval = setInterval(showTime, 100);
     }
 
     const mapRows = map.trim().split('\n');
@@ -166,6 +176,10 @@ function levelFail(){
     if(lives <= 0){
         level = 0;
         lives = 3;
+        clearInterval(TimeInterval);
+        timeStart = Date.now();
+        TimeInterval = setInterval(showTime, 100);
+
     }
     playerPosition.x = undefined;
     playerPosition.y = undefined;
@@ -174,12 +188,27 @@ function levelFail(){
 
 function gameWin(){
     console.log('You finished the game');
+    clearInterval(TimeInterval);
 }
 
 function showLives(){
     const heartsArray = Array(lives).fill(emojis['HEART']);
     spanLives.innerHTML = '';
     heartsArray.forEach(heart => spanLives.append(heart));
+}
+
+function showTime(){
+    spanTime.innerHTML = formatTime(Date.now() - timeStart);
+}
+
+function formatTime(ms){
+    const cs = parseInt(ms/10) % 100
+    const seg = parseInt(ms/1000) % 60
+    const min = parseInt(ms/60000) % 60
+    const csStr = `${cs}`.padStart(2,"0")
+    const segStr = `${seg}`.padStart(2,"0")
+    const minStr = `${min}`.padStart(2,"0")
+    return`${minStr}:${segStr}:${csStr}`
 }
 
 function moveUp(){
