@@ -4,6 +4,7 @@ const upButton = document.querySelector('#up');
 const leftButton = document.querySelector('#left');
 const rightButton = document.querySelector('#right');
 const downButton = document.querySelector('#down');
+const spanLives = document.querySelector('#lives');
 
 
 window.addEventListener('load', setCanvasSize);
@@ -17,6 +18,15 @@ const playerPosition = {
     y: undefined
 };
 
+const winPosition = {
+    x: undefined,
+    y: undefined
+};
+
+let enemyPositions = [];
+let level = 0;
+let lives = 3;
+
 function startGame(){
 
     console.log({canvasSize, elementsSize});
@@ -24,16 +34,30 @@ function startGame(){
     game.font = (elementsSize - 12) + 'px Verdana';
     game.textAlign = 'end';
 
-    const map = maps[0];
+    const map = maps[level];
+
+    if(!map){
+        gameWin();
+        return
+    }
+
     const mapRows = map.trim().split('\n');
     const mapRowCols = mapRows.map(row => row.trim().split(''));
     console.log(mapRows);
     console.log(mapRowCols)
     console.log(map);
 
+    // Lives
+
+    showLives();
+
     // Clear map
 
     game.clearRect(0, 0, canvasSize, canvasSize);
+
+    // Clear enemies array
+
+    enemyPositions = [];
 
     // Rendering with forEach
 
@@ -49,6 +73,26 @@ function startGame(){
                     console.log(playerPosition);
                 }
             }
+            else if(col == 'L'){
+                winPosition.x = posX;
+                winPosition.y = posY;
+            }
+            else if(col == 'I'){
+                winPosition.x = posX;
+                winPosition.y = posY;
+            }
+            else if(col == 'G'){
+                winPosition.x = posX;
+                winPosition.y = posY;
+            }
+            else if(col == 'X'){
+                enemyPositions.push({
+                    x: posX,
+                    y: posY
+                });
+            }
+
+
             game.fillText(emoji, posX, posY);
         });
     });
@@ -86,7 +130,56 @@ rightButton.addEventListener('click', moveRight);
 downButton.addEventListener('click', moveDown);
 
 function movePlayer(){
+    
+    const winCollisionX = playerPosition.x.toFixed(2) == winPosition.x.toFixed(2);
+    const winCollisionY = playerPosition.y.toFixed(2) == winPosition.y.toFixed(2);
+    const winCollision = winCollisionX && winCollisionY;
+
+    if(winCollision){
+        levelWin();
+    }
+
+    const enemyCollisions = enemyPositions.find(enemy => {
+        const enemyCollisionX = enemy.x.toFixed(2) == playerPosition.x.toFixed(2);
+        const enemyCollisionY = enemy.y.toFixed(2) == playerPosition.y.toFixed(2);
+        return enemyCollisionX && enemyCollisionY;
+    });
+
+    if(enemyCollisions){
+        setTimeout(levelFail, 100);
+        game.fillText(emojis['SHIP_COLLISION'], playerPosition.x, playerPosition.y);
+        return;
+
+    }
+
     game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
+}
+
+function levelWin(){
+    console.log('You win');
+    level++;
+    startGame(); 
+}
+
+function levelFail(){
+    lives--;
+    if(lives <= 0){
+        level = 0;
+        lives = 3;
+    }
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
+    startGame();
+}
+
+function gameWin(){
+    console.log('You finished the game');
+}
+
+function showLives(){
+    const heartsArray = Array(lives).fill(emojis['HEART']);
+    spanLives.innerHTML = '';
+    heartsArray.forEach(heart => spanLives.append(heart));
 }
 
 function moveUp(){
