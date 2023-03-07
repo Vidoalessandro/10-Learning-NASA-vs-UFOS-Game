@@ -6,6 +6,9 @@ const rightButton = document.querySelector('#right');
 const downButton = document.querySelector('#down');
 const spanLives = document.querySelector('#lives');
 const spanTime = document.querySelector('#time');
+const spanRecord = document.querySelector('#record');
+const result = document.querySelector('#result');
+
 
 
 window.addEventListener('load', setCanvasSize);
@@ -31,6 +34,7 @@ let lives = 3;
 let timeStart;
 let timePlayer;
 let TimeInterval;
+const recordTime = localStorage.getItem('record_time');
 
 function startGame(){
 
@@ -49,6 +53,7 @@ function startGame(){
     if(!timeStart){
         timeStart = Date.now();
         TimeInterval = setInterval(showTime, 100);
+        showRecord();
     }
 
     const mapRows = map.trim().split('\n');
@@ -189,6 +194,22 @@ function levelFail(){
 function gameWin(){
     console.log('You finished the game');
     clearInterval(TimeInterval);
+
+    const playerTime = formatTime(Date.now() - timeStart);
+
+    if(recordTime){
+        if(recordTime >= playerTime){
+            localStorage.setItem('record_time', playerTime);
+            result.innerHTML = 'Yeah! new record 💪🏻';
+        } else {
+            result.innerHTML = 'Cheer up, you can top it next time 🙌🏻';
+        }
+    } else {
+        localStorage.setItem('record_time', playerTime);
+        result.innerHTML = 'Your first score! let\'s see if you get over it 🤩';
+    }
+    
+    console.log({recordTime, playerTime});
 }
 
 function showLives(){
@@ -198,7 +219,8 @@ function showLives(){
 }
 
 function showTime(){
-    spanTime.innerHTML = formatTime(Date.now() - timeStart);
+    timePlayer = formatTime(Date.now() - timeStart);
+    spanTime.innerHTML = timePlayer;
 }
 
 function formatTime(ms){
@@ -210,6 +232,14 @@ function formatTime(ms){
     const minStr = `${min}`.padStart(2,"0")
     return`${minStr}:${segStr}:${csStr}`
 }
+
+function showRecord(){
+    if(!recordTime){
+    } else {
+        spanRecord.innerHTML = localStorage.getItem('record_time') + '🔥';
+    }
+    return;   
+}    
 
 function moveUp(){
     console.log('up');
