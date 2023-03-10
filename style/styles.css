@@ -15,3 +15,178 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #fff;
 }
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 0 auto;
+    padding-top: 30px;
+}
+
+header img {
+    width: 250px;
+    height: 230px;
+}
+
+header h1 {
+    font-size: 5.5rem;
+    font-weight: 300;
+    font-family: 'Climate Crisis', cursive;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+
+main .social-container {
+    display: flex;
+    align-items: end;
+    width: 100%;
+    order: 1;
+}
+
+
+.sidebar-social ul a {
+    text-decoration: none;
+}
+
+.sidebar-social li {
+    list-style: none;
+    color: #fff;
+    width: 50px;
+    display: flex;
+    overflow: hidden;
+    padding: 17px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1.5rem;
+}
+
+.sidebar-social li:hover {
+    width: 180px;
+}
+
+.sidebar-social li i {
+    margin-right: 22px;
+}
+
+.twitter {
+    background-color: #1d9bf0;
+}
+
+.ln {
+    background-color: hsl(210deg 89% 40%);
+}
+
+.github {
+    background-color: #0f1113;
+}
+
+.sidebar-social .twitter:hover {
+    background-color: #1d9bf0;
+}
+
+.sidebar-social .ln:hover {
+    background-color: hsl(210deg 89% 40%);
+}
+
+.sidebar-social .github:hover {
+    background-color: #0f1113;
+}
+
+main .welcome-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 250px;
+    padding-top: 50px;
+    padding: 0 auto;
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    height: 20px;
+}
+
+.typing-demo {
+    width: 25ch;
+    height: auto;
+    animation: typing 2s steps(25), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+    font-size: 2rem;
+    color:  #FFFF00;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.playGame {
+    position: relative;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 100px;
+    font-family: monospace;
+    font-size: 2rem;
+    color:  #FFFF00;
+}
+
+#playIcon {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid cyan;
+    margin-bottom: 10px;
+    padding: 15px;
+    text-decoration: none;
+}
+
+#playIcon:hover {
+    background-color: cyan;
+}
+
+#playIcon span {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-image: url('https://t4.ftcdn.net/jpg/05/71/14/47/360_F_571144792_UgI3wPIm026vj32a9VCjpZup29XbpqXQ.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 83px;
+    padding-top: 40px;
+}
