@@ -99,6 +99,55 @@ p {
     width: 100%;
 }
 
+.finish-messages-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 300px;
+    background-image: url(../assets/img/Space.jpg);
+    border: 3px solid cyan;
+}
+
+.result-message {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    padding: 40px 20px 0 20px;
+    font-size: 1.9rem;
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    padding: 15px;
+}
+
+.buttons button {
+    width: 200px;
+    height: 50px;
+    background-color: cyan;
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+}
+
+.exit-button a {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+
 @media (max-width: 440px) {
 
     button {
