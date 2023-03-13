@@ -116,7 +116,7 @@ p {
     width: 100%;
     height: 50%;
     padding: 40px 20px 0 20px;
-    font-size: 1.9rem;
+    font-size: 2.2rem;
     font-weight: bold;
 }
 
@@ -133,19 +133,24 @@ p {
     width: 200px;
     height: 50px;
     background-color: cyan;
-    font-size: 1.7rem;
-    font-weight: bold;
-    color: black;
-    cursor: pointer;
+
 }
 
-.exit-button a {
+#retry-button a,
+#exit-button a {
     display: inline-block;
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    padding-top: 13px;
     text-decoration: none;
     text-align: center;
     color: black;
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+.inactive {
+    display: none;
 }
 
 @media (max-width: 440px) {

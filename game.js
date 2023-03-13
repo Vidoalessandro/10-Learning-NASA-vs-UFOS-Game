@@ -8,8 +8,22 @@ const spanLives = document.querySelector('#lives');
 const spanTime = document.querySelector('#time');
 const spanRecord = document.querySelector('#record');
 const result = document.querySelector('#result');
+const windowMessage = document.querySelector('.finish-messages-container');
+const retryButton = document.querySelector('#retry-button');
 
+retryButton.addEventListener('click', retry);
 
+function retry(){
+    windowMessage.classList.add('inactive');
+}
+
+function quitWindowMessage(){
+    windowMessage.classList.add('inactive');
+}
+
+function addWindowMessage(){
+    windowMessage.classList.remove('inactive');
+}
 
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
@@ -164,7 +178,6 @@ function movePlayer(){
         setTimeout(levelFail, 100);
         game.fillText(emojis['SHIP_COLLISION'], playerPosition.x, playerPosition.y);
         return;
-
     }
 
     game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
@@ -179,12 +192,11 @@ function levelWin(){
 function levelFail(){
     lives--;
     if(lives <= 0){
-        level = 0;
-        lives = 3;
+        lives--;
         clearInterval(TimeInterval);
-        timeStart = Date.now();
-        TimeInterval = setInterval(showTime, 100);
-
+        addWindowMessage();
+        result.innerHTML = 'You lost 💥, good luck next time';
+        return;
     }
     playerPosition.x = undefined;
     playerPosition.y = undefined;
@@ -200,12 +212,15 @@ function gameWin(){
     if(recordTime){
         if(recordTime >= playerTime){
             localStorage.setItem('record_time', playerTime);
+            addWindowMessage();
             result.innerHTML = 'Yeah! new record 💪🏻';
         } else {
+            addWindowMessage();
             result.innerHTML = 'Cheer up, you can top it next time 🙌🏻';
         }
     } else {
         localStorage.setItem('record_time', playerTime);
+        addWindowMessage();
         result.innerHTML = 'Your first score! let\'s see if you get over it 🤩';
     }
     

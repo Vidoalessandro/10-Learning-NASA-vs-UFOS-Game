@@ -14,7 +14,7 @@ const emojis = {
     'SHIP_COLLISION': '💥',
     'GAME_OVER': '👽',
     'WIN': '🌟',
-    'HEART': '💙'
+    'HEART': '🚀'
   };
 
   const maps = [];
