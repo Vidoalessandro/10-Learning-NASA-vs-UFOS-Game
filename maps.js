@@ -3,6 +3,8 @@
  * The end of each level must be the beginning of the next one
 */
 
+// Emojis
+
 const emojis = {
     '-': ' ',
     'O': '🌎',
@@ -16,6 +18,8 @@ const emojis = {
     'WIN': '🌟',
     'HEART': '🚀'
   };
+
+// Maps
 
   const maps = [];
 maps.push(`

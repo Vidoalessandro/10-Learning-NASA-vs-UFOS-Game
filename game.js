@@ -1,3 +1,5 @@
+// Document variables
+
 const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
 const upButton = document.querySelector('#up');
@@ -10,6 +12,8 @@ const spanRecord = document.querySelector('#record');
 const result = document.querySelector('#result');
 const windowMessage = document.querySelector('.finish-messages-container');
 const retryButton = document.querySelector('#retry-button');
+
+// Message window
 
 retryButton.addEventListener('click', retry);
 
@@ -25,23 +29,34 @@ function addWindowMessage(){
     windowMessage.classList.remove('inactive');
 }
 
+// Sets the size of the canvas
+
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
 
 let canvasSize;
 let elementsSize;
 
+// Player position
+
 const playerPosition = {
     x: undefined,
     y: undefined
 };
+
+// Place to win
 
 const winPosition = {
     x: undefined,
     y: undefined
 };
 
+// Enemy position
+
 let enemyPositions = [];
+
+// Some global time and game mode variables
+
 let level = 0;
 let lives = 3;
 
@@ -49,6 +64,8 @@ let timeStart;
 let timePlayer;
 let TimeInterval;
 const recordTime = localStorage.getItem('record_time');
+
+// Canvas rendering
 
 function startGame(){
 
@@ -137,6 +154,8 @@ function startGame(){
     movePlayer();
 }
 
+// Sets the size of the canvas and its internal elements (Character arrival points, departure points and enemies)
+
 function setCanvasSize(){
 
     if(window.innerHeight > window.innerWidth){
@@ -156,10 +175,7 @@ function setCanvasSize(){
     startGame();
 }
   
-upButton.addEventListener('click', moveUp);
-leftButton.addEventListener('click', moveLeft);
-rightButton.addEventListener('click', moveRight);
-downButton.addEventListener('click', moveDown);
+// Movement and interaction of the player with the other elements (Collisions)
 
 function movePlayer(){
     
@@ -186,11 +202,15 @@ function movePlayer(){
     game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
 }
 
+// Pass level
+
 function levelWin(){
     console.log('You win');
     level++;
     startGame(); 
 }
+
+// Lose lives until you restart the game
 
 function levelFail(){
     lives--;
@@ -206,6 +226,8 @@ function levelFail(){
     playerPosition.y = undefined;
     startGame();
 }
+
+// Win the game
 
 function gameWin(){
     console.log('You finished the game');
@@ -231,16 +253,22 @@ function gameWin(){
     console.log({recordTime, playerTime});
 }
 
+// System of lives
+
 function showLives(){
     const heartsArray = Array(lives).fill(emojis['HEART']);
     spanLives.innerHTML = '';
     heartsArray.forEach(heart => spanLives.append(heart));
 }
 
+// Show the game time
+
 function showTime(){
     timePlayer = formatTime(Date.now() - timeStart);
     spanTime.innerHTML = timePlayer;
 }
+
+// Convert time from milliseconds to other units
 
 function formatTime(ms){
     const cs = parseInt(ms/10) % 100
@@ -252,13 +280,19 @@ function formatTime(ms){
     return`${minStr}:${segStr}:${csStr}`
 }
 
+// Show the record time
+
 function showRecord(){
     if(!recordTime){
     } else {
         spanRecord.innerHTML = localStorage.getItem('record_time') + '🔥';
     }
     return;   
-}    
+}
+
+// Movement system
+
+// Functionality of each movement
 
 function moveUp(){
     console.log('up');
@@ -299,6 +333,15 @@ function moveDown(){
         startGame();
     }
 }
+
+// With arrows on the screen
+
+upButton.addEventListener('click', moveUp);
+leftButton.addEventListener('click', moveLeft);
+rightButton.addEventListener('click', moveRight);
+downButton.addEventListener('click', moveDown);
+
+// With keys
 
 window.addEventListener('keydown', moveByKeys);
 
