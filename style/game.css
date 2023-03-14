@@ -9,7 +9,7 @@ html {
 }
 
 body {
-    background-image: url('../assets/img/Space.jpg');
+    background-image: url('https://res.cloudinary.com/deiklgpit/image/upload/v1678750846/Space_urpohz.jpg');
     background-repeat: no-repeat;
     font-size: 1.6rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -51,14 +51,14 @@ canvas {
 }
 
 .btns #up {
-    background-image: url('/assets/icons/arrowButton.png');
+    background-image: url('https://res.cloudinary.com/deiklgpit/image/upload/v1678750845/arrowButton_wzpxvk.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
 .btns #left {
-    background-image: url('/assets/icons/arrowButton.png');
+    background-image: url('https://res.cloudinary.com/deiklgpit/image/upload/v1678750845/arrowButton_wzpxvk.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -66,7 +66,7 @@ canvas {
 }
 
 .btns #right {
-    background-image: url('/assets/icons/arrowButton.png');
+    background-image: url('https://res.cloudinary.com/deiklgpit/image/upload/v1678750845/arrowButton_wzpxvk.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -74,7 +74,7 @@ canvas {
 }
 
 .btns #down {
-    background-image: url('/assets/icons/arrowButton.png');
+    background-image: url('https://res.cloudinary.com/deiklgpit/image/upload/v1678750845/arrowButton_wzpxvk.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -156,7 +156,7 @@ p {
 @media (max-width: 440px) {
 
     button {
-        margin-top: 25px;
+        margin-top: 5px;
     }
 
     #up, down {

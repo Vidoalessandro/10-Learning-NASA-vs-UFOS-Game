@@ -52,7 +52,7 @@ const recordTime = localStorage.getItem('record_time');
 
 function startGame(){
 
-    console.log({canvasSize, elementsSize});
+    // console.log({canvasSize, elementsSize});
 
     game.font = (elementsSize - 12) + 'px Verdana';
     game.textAlign = 'end';
@@ -72,9 +72,9 @@ function startGame(){
 
     const mapRows = map.trim().split('\n');
     const mapRowCols = mapRows.map(row => row.trim().split(''));
-    console.log(mapRows);
-    console.log(mapRowCols)
-    console.log(map);
+    // console.log(mapRows);
+    // console.log(mapRowCols)
+    // console.log(map);
 
     // Lives
 
@@ -99,7 +99,7 @@ function startGame(){
                 if(!playerPosition.x && !playerPosition.y){
                     playerPosition.x = posX;
                     playerPosition.y = posY;
-                    console.log(playerPosition);
+                    // console.log(playerPosition);
                 }
             }
             else if(col == 'L'){
@@ -150,6 +150,9 @@ function setCanvasSize(){
 
     elementsSize = (canvasSize / 10) - 1;
 
+
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
     startGame();
 }
   
@@ -196,6 +199,7 @@ function levelFail(){
         clearInterval(TimeInterval);
         addWindowMessage();
         result.innerHTML = 'You lost 💥, good luck next time';
+        console.log('You lost');
         return;
     }
     playerPosition.x = undefined;

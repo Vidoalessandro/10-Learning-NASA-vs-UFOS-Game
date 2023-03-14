@@ -9,7 +9,7 @@ html {
 }
 
 body {
-    background-image: url('../assets/img/Space.jpg');
+    background-image: url('https://res.cloudinary.com/deiklgpit/image/upload/v1678750846/Space_urpohz.jpg');
     background-repeat: no-repeat;
     font-size: 1.6rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
